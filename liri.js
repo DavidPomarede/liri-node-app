@@ -1,25 +1,32 @@
-require("dotenv").config();
+var input = process.argv;
 
-var keys = require("./keys.js");
-
+require('dotenv').config();
+var keys = require('./keys.js');
 var spotify = new Spotify(keys.spotify);
 
-//concert-this
-//spotify-this-song
-//movie-this
-//do-what-it-says
+var fs = require('fs');
+var axios = require('axios');
 
 
-//What Each Command Should Do
-
-
-//node liri.js concert-this <artist/band name here>
+var Spotify = require('node-spotify-api');
 
 
 
 
-//This will search the Bands in Town Artist Events API ("https://rest.bandsintown.com/artists/" + artist + "/events?app_id=codingbootcamp") for an artist and render the following information about each event to the terminal:
 
+
+
+//------------
+
+if (input[2] == "concert-this") {
+
+var artist = input[3];
+
+var queryUrl = "https://rest.bandsintown.com/artists/" + artist + "/events?app_id=codingbootcamp"
+
+axios.get(queryUrl).then(
+  function(response) {
+    console.log("The movie's rating is: " + response.data.imdbRating);
 
 //Name of the venue
 //Venue location
@@ -27,14 +34,51 @@ var spotify = new Spotify(keys.spotify);
 
 
 
+fs.appendFile('log.txt', "\n" + dataOut, function(err) {
+  if (err) {
+    console.log(err);
+  } else {
+    console.log("Content Added!");
+  }
+});
 
 
-//node liri.js spotify-this-song '<song name here>'
 
 
+  })
+  .catch(function(error) {
+    if (error.response) {
+      // The request was made and the server responded with a status code
+      // that falls out of the range of 2xx
+      console.log("---------------Data---------------");
+      console.log(error.response.data);
+      console.log("---------------Status---------------");
+      console.log(error.response.status);
+      console.log("---------------Status---------------");
+      console.log(error.response.headers);
+    } else if (error.request) {
+      // The request was made but no response was received
+      // `error.request` is an object that comes back with details pertaining t$
+      console.log(error.request);
+    } else {
+      // Something happened in setting up the request that triggered an Error
+      console.log("Error", error.message);
+    }
+    console.log(error.config);
+  });
 
 
-//This will show the following information about the song in your terminal/bash window
+};
+
+if (input[2] == "spotify-this-song") {
+	var songQuery = input[3];
+	spotify.search({ type: 'track', query: songQuery }, function(err, $
+  		if (err) {
+    			return console.log('Error occurred: ' + err);
+  		}
+		console.log(data);
+	});
+
 
 
 //Artist(s)
@@ -43,17 +87,28 @@ var spotify = new Spotify(keys.spotify);
 //The album that the song is from
 
 
-//If no song is provided then your program will default to "The Sign" by Ace of Base.
-//You will utilize the node-spotify-api package in order to retrieve song information from the Spotify API.
+//search: function({
+//type: 'artist OR album OR track',
+//query: 'My search query',
+//limit: 20
+//},
+//callback
+//);
 
-//------
+};
 
-//node liri.js movie-this '<movie name here>'
+if (input[2] == "movie-this") {
+// Grab or assemble the movie name and store it in a variable called "movieName"
+var movieName = input[3];
+// ...
+
+// Then run a request with axios to the OMDB API with the movie specified
+var queryUrl = "http://www.omdbapi.com/?t=" + movieName + "&y=&plot=short&apike
 
 
-
-
-//This will output the following information to your terminal/bash window:
+axios.get(queryUrl).then(
+  function(response) {
+    console.log("The movie's rating is: " + response.data.imdbRating);
 
 //   * Title of the movie.
 //   * Year the movie came out.
@@ -65,33 +120,50 @@ var spotify = new Spotify(keys.spotify);
 //   * Actors in the movie.
 
 
-//If the user doesn't type a movie in, the program will output data for the movie 'Mr. Nobody.'
 
-
-//If you haven't watched "Mr. Nobody," then you should: http://www.imdb.com/title/tt0485947/
-
-//It's on Netflix!
-
-
-//You'll use the axios package to retrieve data from the OMDB API. Like all of the in-class activities, the OMDB API requires an API key. You may use trilogy.
-
-
-//node liri.js do-what-it-says
+fs.appendFile('log.txt', "\n" + dataOut, function(err) {
+  if (err) {
+    console.log(err);
+  } else {
+    console.log("Content Added!");
+  }
+});
 
 
 
+  })
+  .catch(function(error) {
+    if (error.response) {
+      console.log("---------------Data---------------");
+      console.log(error.response.data);
+      console.log("---------------Status---------------");
+      console.log(error.response.status);
+      console.log("---------------Status---------------");
+      console.log(error.response.headers);
+    } else if (error.request) {
+       console.log(error.request);
+    } else {
+       console.log("Error", error.message);
+    }
+    console.log(error.config);
+  });
+};
 
-//Using the fs Node package, LIRI will take the text inside of random.txt and then use it to call one of LIRI's commands.
+if (input[2] == "do-what-it-says") {
+ fs.readFile("random.txt", "utf8", function(error, data) {
+
+  if (error) {
+    return console.log(error);
+  }
+
+  console.log(data);
+  var dataArr = data.split(",");
+  console.log(dataArr);
+
+//here you can run functions on dataArr[1] based on what dataArr[0] says
+//maybe you have to put each search in a function... that's work!
 
 
-//It should run spotify-this-song for "I Want it That Way," as follows the text in random.txt.
-//Edit the text in random.txt to test out the feature for movie-this and concert-this.
 
-
-
-
-
-//BONUS
-
-
-//In addition to logging the data to your terminal/bash window, output the data to a .txt file called log.txt.
+  });
+};
