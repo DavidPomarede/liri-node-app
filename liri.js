@@ -1,16 +1,19 @@
 var input = process.argv;
 
+var command = input[2];
+var query = input[3];
+
 require('dotenv').config();
 var keys = require('./keys.js');
-var spotify = new Spotify(keys.spotify);
-
-var fs = require('fs');
-var axios = require('axios');
 
 
 var Spotify = require('node-spotify-api');
 
 
+var spotify = new Spotify(keys.spotify);
+
+var fs = require('fs');
+var axios = require('axios');
 
 
 
@@ -18,21 +21,22 @@ var Spotify = require('node-spotify-api');
 
 //------------
 
-if (input[2] == "concert-this") {
 
-var artist = input[3];
+
+
+var concertFunc = function() {
+
+var artist = query;
 
 var queryUrl = "https://rest.bandsintown.com/artists/" + artist + "/events?app_id=codingbootcamp"
 
 axios.get(queryUrl).then(
   function(response) {
-    console.log("The movie's rating is: " + response.data.imdbRating);
-
+    console.log(response);
+    console.log(response.data);
 //Name of the venue
 //Venue location
 //Date of the Event (use moment to format this as "MM/DD/YYYY")
-
-
 
 fs.appendFile('log.txt', "\n" + dataOut, function(err) {
   if (err) {
@@ -41,9 +45,6 @@ fs.appendFile('log.txt', "\n" + dataOut, function(err) {
     console.log("Content Added!");
   }
 });
-
-
-
 
   })
   .catch(function(error) {
@@ -67,12 +68,12 @@ fs.appendFile('log.txt', "\n" + dataOut, function(err) {
     console.log(error.config);
   });
 
-
 };
 
-if (input[2] == "spotify-this-song") {
-	var songQuery = input[3];
-	spotify.search({ type: 'track', query: songQuery }, function(err, $
+
+
+var songFunc = function() {
+	spotify.search({ type: 'track', query: query }, function(err, data) {
   		if (err) {
     			return console.log('Error occurred: ' + err);
   		}
@@ -97,25 +98,29 @@ if (input[2] == "spotify-this-song") {
 
 
 
-fs.appendFile('log.txt', "\n" + dataOut, function(err) {
-  if (err) {
-    console.log(err);
-  } else {
-    console.log("Content Added!");
-  }
-});
+//fs.appendFile('log.txt', "\n" + dataOut, function(err) {
+//  if (err) {
+//    console.log(err);
+//  } else {
+//    console.log("Content Added!");
+//  }
+//});
 
 
 
 };
 
-if (input[2] == "movie-this") {
+
+
+var movieFunc = function() {
+
+
 // Grab or assemble the movie name and store it in a variable called "movieName"
-var movieName = input[3];
+var movieName = query;
 // ...
 
 // Then run a request with axios to the OMDB API with the movie specified
-var queryUrl = "http://www.omdbapi.com/?t=" + movieName + "&y=&plot=short&apike
+var queryUrl = "http://www.omdbapi.com/?t=" + movieName + "&y=&plot=short&apikey=trilogy"
 
 
 axios.get(queryUrl).then(
@@ -159,9 +164,12 @@ fs.appendFile('log.txt', "\n" + dataOut, function(err) {
     }
     console.log(error.config);
   });
+
 };
 
-if (input[2] == "do-what-it-says") {
+
+
+var whatSaysFunc = function() {
  fs.readFile("random.txt", "utf8", function(error, data) {
 
   if (error) {
@@ -171,11 +179,53 @@ if (input[2] == "do-what-it-says") {
   console.log(data);
   var dataArr = data.split(",");
   console.log(dataArr);
-
+	query = dataArr[1];
 //here you can run functions on dataArr[1] based on what dataArr[0] says
 //maybe you have to put each search in a function... that's work!
-
-
+switch (true) {
+    case dataArr[0] == "concert-this":
+        console.log("A");
+	concertFunc();
+        break;
+    case dataArr[0] == "spotify-this-song":
+        console.log("B");
+	songFunc();	
+        break;
+    case dataArr[0] == "movie-this":
+        console.log("C");
+	movieFunc();
+        break;
+    default:
+        console.log("F");
+};
 
   });
 };
+
+
+
+//------------
+
+switch (true) {
+    case input[2] == "concert-this":
+        console.log("A");
+	concertFunc();
+        break;
+    case input[2] == "spotify-this-song":
+        console.log("B");
+	songFunc();	
+        break;
+    case input[2] == "movie-this":
+        console.log("C");
+	movieFunc();
+        break;
+    case input[2] == "do-what-it-says":
+        console.log("D");
+	whatSaysFunc();
+        break;
+    default:
+        console.log("F");
+};
+
+
+
