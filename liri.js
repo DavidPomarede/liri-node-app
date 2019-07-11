@@ -95,6 +95,18 @@ if (input[2] == "spotify-this-song") {
 //callback
 //);
 
+
+
+fs.appendFile('log.txt', "\n" + dataOut, function(err) {
+  if (err) {
+    console.log(err);
+  } else {
+    console.log("Content Added!");
+  }
+});
+
+
+
 };
 
 if (input[2] == "movie-this") {
