@@ -66,6 +66,8 @@ var songFunc = function() {
     			return console.log('Error occurred: ' + err);
   		}
 		console.log(data);
+
+
 	});
 
 
@@ -100,28 +102,19 @@ var songFunc = function() {
 
 var movieFunc = function() {
 
-
-	// Grab or assemble the movie name and store it in a variable called "movieName"
 	var movieName = query;
-	// ...
-	
-	// Then run a request with axios to the OMDB API with the movie specified
 	var queryUrl = "http://www.omdbapi.com/?t=" + movieName + "&y=&plot=short&apikey=trilogy"
-
 
 	axios.get(queryUrl).then(
 	  function(response) {
-	    console.log("The movie's rating is: " + response.data.imdbRating);
-
-	//   * Title of the movie.
-	//   * Year the movie came out.
-	//   * IMDB Rating of the movie.
-	//   * Rotten Tomatoes Rating of the movie.
-	//   * Country where the movie was produced.
-	//   * Language of the movie.
-	//   * Plot of the movie.
-	//   * Actors in the movie.
-	
+		console.log("Title: " + response.data.Title);
+		console.log("Year: " + response.data.Year);
+		console.log("The movie's IMDB rating is: " + response.data.Ratings[0].Value);
+		console.log("The movie's Rotten Tomatoes rating is: " + response.data.Ratings[1].Value);
+		console.log("Country: " + response.data.Country);
+		console.log("Language: " + response.data.Language);
+		console.log("Plot: " + response.data.Plot);
+		console.log("Cast: " + response.data.Actors);
 
 fs.appendFile('log.txt', "\n" + dataOut, function(err) {
   if (err) {
@@ -130,8 +123,6 @@ fs.appendFile('log.txt', "\n" + dataOut, function(err) {
     console.log("Content Added!");
   }
 });
-
-
 
 	  })
 	  .catch(function(error) {
@@ -149,10 +140,7 @@ fs.appendFile('log.txt', "\n" + dataOut, function(err) {
 	    }
 	    console.log(error.config);
 	  });
-
 };
-
-
 
 var whatSaysFunc = function() {
 	 fs.readFile("random.txt", "utf8", function(error, data) {
@@ -169,19 +157,16 @@ var whatSaysFunc = function() {
 	//maybe you have to put each search in a function... that's work!
 	switch (true) {
 	    case dataArr[0] == "concert-this":
-	        console.log("A");
 		concertFunc();
 	        break;
 	    case dataArr[0] == "spotify-this-song":
-	        console.log("B");
 		songFunc();	
 	        break;
 	    case dataArr[0] == "movie-this":
-	        console.log("C");
 		movieFunc();
 	        break;
 	    default:
-	        console.log("F");
+	        console.log("Do something else");
 	};	
   });
 };
@@ -192,23 +177,19 @@ var whatSaysFunc = function() {
 
 switch (true) {
     case input[2] == "concert-this":
-        console.log("A");
 	concertFunc();
         break;
     case input[2] == "spotify-this-song":
-        console.log("B");
 	songFunc();	
         break;
     case input[2] == "movie-this":
-        console.log("C");
 	movieFunc();
         break;
     case input[2] == "do-what-it-says":
-        console.log("D");
 	whatSaysFunc();
         break;
     default:
-        console.log("F");
+        console.log("Please enter a command: concert-this, spotify-this-song, movie-this, or do-what-it-says.");
 };
 
 
