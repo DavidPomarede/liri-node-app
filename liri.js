@@ -24,7 +24,7 @@ var concertFunc = function() {
 
 	axios.get(queryUrl).then(
 	  function(response) {
-		console.log("\nYou seached for: "+ artist + "\n");
+		console.log("\nYou searched for: "+ artist + "\n");
 		console.log("Where: " + response.data[0].venue.name + " in " + response.data[0].venue.city + ", " + response.data[0].venue.country);
 		console.log("When: " + moment(response.data[0].datetime).format('L'));
 
@@ -64,7 +64,7 @@ var songFunc = function() {
   		if (err) {
     			return console.log('Error occurred: ' + err);
   		}
-	        console.log("\nYou seached for: "+ query + "\n");
+	        console.log("\nYou searched for: "+ query + "\n");
 		console.log("Track: " +data.tracks.items[0].name);
 		console.log("Artist: " + data.tracks.items[0].artists[0].name);
 		console.log("From the album: " + data.tracks.items[0].album.name);
@@ -90,7 +90,7 @@ var movieFunc = function() {
 
 	axios.get(queryUrl).then(
 	  function(response) {
-	        console.log("\nYou seached for: "+ movieName + "\n");
+	        console.log("\nYou searched for: "+ movieName + "\n");
 		console.log("Title: " + response.data.Title);
 		console.log("Year: " + response.data.Year);
 		console.log("The movie's IMDB rating is: " + response.data.Ratings[0].Value);
