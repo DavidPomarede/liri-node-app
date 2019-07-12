@@ -26,7 +26,7 @@ var concertFunc = function() {
 		console.log("Where: " + response.data[0].venue.name + " in " + response.data[0].venue.city + ", " + response.data[0].venue.country);
 		console.log("When: " + moment(response.data[0].datetime).format('L'));
 
-		dataOut = "\nSearch: " + artist + "\n" + "Where: " + response.data[0].venue.name + " in " + response.data[0].venue.city + ", " + response.data[0].venue.country + "\n" + "When: " + moment(response.data[0].datetime).format('L');
+		dataOut = "\n>>>CONCERT SEARCH\nSearch: " + artist + "\n" + "Where: " + response.data[0].venue.name + " in " + response.data[0].venue.city + ", " + response.data[0].venue.country + "\n" + "When: " + moment(response.data[0].datetime).format('L');
 
 		fs.appendFile('log.txt', "\n" + dataOut, function(err) {
 		  if (err) {
@@ -67,7 +67,7 @@ var songFunc = function() {
 		console.log("Artist: " + data.tracks.items[0].artists[0].name);
 		console.log("From the album: " + data.tracks.items[0].album.name);
 		console.log("Link: " + data.tracks.items[0].external_urls.spotify);
-		dataOut = "\nSearch: " + query + "\n" + "Track: " +data.tracks.items[0].name + "\n" + "Artist: " + data.tracks.items[0].artists[0].name + "\n" + "From the album: " + data.tracks.items[0].album.name + "\n" + "Link: " + data.tracks.items[0].external_urls.spotify;
+		dataOut = "\n>>>SONG SEARCH\nSearch: " + query + "\n" + "Track: " +data.tracks.items[0].name + "\n" + "Artist: " + data.tracks.items[0].artists[0].name + "\n" + "From the album: " + data.tracks.items[0].album.name + "\n" + "Link: " + data.tracks.items[0].external_urls.spotify;
 
 		fs.appendFile('log.txt', "\n" + dataOut, function(err) {
  		 if (err) {
@@ -98,7 +98,7 @@ var movieFunc = function() {
 		console.log("Plot: " + response.data.Plot);
 		console.log("Cast: " + response.data.Actors);
 
-		dataOut = "\nSearch: " + movieName + "\n" + "Title: " + response.data.Title + "\n" + "Year: " + response.data.Year + "\n" + "The movie's IMDB rating is: " + response.data.Ratings[0].Value + "\n" + "The movie's Rotten Tomatoes rating is: " + response.data.Ratings[1].Value + "\n" + "Country: " + response.data.Country + "\n" + "Language: " + response.data.Language + "\n" + "Plot: " + response.data.Plot + "\n" + "Cast: " + response.data.Actors;
+		dataOut = "\n>>>MOVIE SEARCH\nSearch: " + movieName + "\n" + "Title: " + response.data.Title + "\n" + "Year: " + response.data.Year + "\n" + "The movie's IMDB rating is: " + response.data.Ratings[0].Value + "\n" + "The movie's Rotten Tomatoes rating is: " + response.data.Ratings[1].Value + "\n" + "Country: " + response.data.Country + "\n" + "Language: " + response.data.Language + "\n" + "Plot: " + response.data.Plot + "\n" + "Cast: " + response.data.Actors;
 
 		fs.appendFile('log.txt', "\n" + dataOut, function(err) {
 		  if (err) {
