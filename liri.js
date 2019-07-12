@@ -1,3 +1,5 @@
+
+
 var input = process.argv;
 var command = input[2];
 var query = input[3];

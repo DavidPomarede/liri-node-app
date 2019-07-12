@@ -39,3 +39,15 @@ Country: USA
 Language: English
 Plot: The presidencies of Kennedy and Johnson, the events of Vietnam, Watergate, and other history unfold through the perspective of an Alabama man with an IQ of 75.
 Cast: Tom Hanks, Rebecca Williams, Sally Field, Michael Conner Humphreys
+
+>>>CONCERT SEARCH
+Search: weekend
+Where: Valkoinen sali in Helsinki, Finland
+When: 07/19/2019
+
+>>>SONG SEARCH
+Search: smells like teen spirit
+Track: Smells Like Teen Spirit
+Artist: Nirvana
+From the album: Nevermind (Remastered)
+Link: https://open.spotify.com/track/5ghIJDpPoe3CfHMGu71E6T
