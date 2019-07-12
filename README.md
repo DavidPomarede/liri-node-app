@@ -5,7 +5,7 @@ The app take two primary arguments:
 	1. What kind of search: *movie* information, *song* information, *concert* information, or if you want to perform a search listed in the file "random.txt"
 	1. The parameters of your search (formatted in quotes if there are spaces).
 
-The **options** for the first argument are the follwing:
+The **options** for the first argument are the following:
 
  * *concert-this* : enter an artist name or band name and find the city, venue and date of their next show. 
  * *spotify-this-song* : enter a song title and get the artist, album and a link to spotify to play the song. 
