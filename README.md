@@ -42,4 +42,5 @@ Technologies used: JS, Node.js, npm, moments.js, fs, SpotifyAPI, OMDBApi, Band i
 **For more help** on installing the necessary packages via NPM, [click here](https://www.npmjs.com/).
 
 Maintained by:
+
 David Pomarede
