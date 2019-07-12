@@ -28,6 +28,7 @@ The result should look something like this:
 
 ![example.png](example.png)
 
+
 **>>>**
 
 **How the app is organized**
