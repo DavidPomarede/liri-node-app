@@ -20,6 +20,13 @@ Clone the repo and make sure you have Node.js and NPM installed. Navigate to the
 
 > npm install
 
+Then create a file in your install named ".env", and paste the following:
+
+> SPOTIFY_ID=your-spotify-id
+> SPOTIFY_SECRET=your-spotify-secret
+
+Replace the text after the equals signs with your Spotify ID and secret. Save your file.
+
 **Example Search**
 
 > node liri spotify-this-song "smells like teen spirit"
